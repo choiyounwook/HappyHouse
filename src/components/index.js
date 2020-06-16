@@ -18,6 +18,7 @@ import SignUpForm from "./Customs/SignUpForm.vue";
 import LogInForm from "./Customs/LogInForm.vue";
 import FindPasswordForm from "./Customs/FindPasswordForm.vue";
 import MyPageForm from "./Customs/MyPageForm.vue";
+import UserEditForm from "./Customs/UserEditForm.vue";
 
 // QnA
 import SimpleQnA from "./QnA/SimpleQnA.vue";
@@ -37,4 +38,5 @@ export {
   SimpleQnA,
   FindPasswordForm,
   MyPageForm,
+  UserEditForm,
 };

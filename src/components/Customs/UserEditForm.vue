@@ -2,7 +2,7 @@
   <form>
     <md-card>
       <md-card-header :data-background-color="dataBackgroundColor">
-        <h4 class="title">My Page</h4>
+        <h4 class="title">회원정보 수정</h4>
         <p class="category">Complete your profile</p>
       </md-card-header>
 
@@ -17,34 +17,35 @@
           <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
               <label>Name</label>
-              <md-input v-model="item.username" type="text" disabled></md-input>
+              <md-input v-model="item.username" type="text"></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-100">
+          <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
               <label>Password</label>
-              <md-input v-model="item.userpwd" type="test" disabled></md-input>
+              <md-input v-model="userpwd" type="password"></md-input>
+            </md-field>
+          </div>
+          <div class="md-layout-item md-small-size-100 md-size-50">
+            <md-field>
+              <label>Reconfirm-PW</label>
+              <md-input v-model="repwd" type="password"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
               <label>Phone</label>
-              <md-input v-model="item.phone" type="text" disabled></md-input>
+              <md-input v-model="item.phone" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
               <label>Address</label>
-              <md-input v-model="item.address" type="text" disabled></md-input>
+              <md-input v-model="item.address" type="text"></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-size-50 text-right">
-              <router-link to="/useredit">
-                <md-button class="md-raised md-success">수정</md-button>
-              </router-link>
-          </div>
-          <div class="md-layout-item md-size-50 text-left">
-            <md-button class="md-raised md-success" @click="deleteUser">탈퇴</md-button>
+          <div class="md-layout-item md-size-100 text-right">
+            <md-button class="md-raised md-success" @click="check">수정</md-button>
           </div>
         </div>
       </md-card-content>
@@ -56,7 +57,7 @@
 import axios from 'axios';
 
 export default {
-  name: "my-page-form",
+  name: "user-edit-form",
 
   props: {
     dataBackgroundColor: {
@@ -67,13 +68,9 @@ export default {
 
   data() {
     return {
-        item: {},
-      userid: null,
-      username: null,
-      userpwd: null,
-      repwd: null,
-      address: null,
-      phone: null,
+      item: {},
+      userpwd: '',
+      repwd: '',
     };
   },
 
@@ -109,22 +106,33 @@ export default {
     },
 
     check() {
-      if (!this.userid || !this.userpwd) {
+      if (!this.item.username || !this.userpwd || !this.repwd || !this.item.phone || !this.item.address) {
         this.notifyVue('top', 'center', '빠진항목이 있습니다.', 'danger');
       } else {
-          this.logIn()
+        if (this.userpwd != this.repwd) {
+            this.notifyVue('top', 'center', '비밀번호가 다릅니다.', 'danger');
+        } else {
+            this.userUpdate();
+        }
       }
     },
 
-    logIn() {
-        axios.get('http://localhost:9999/happyhouse/api/user/login/' + this.userid + '&' + this.userpwd).then(({ data }) => {
-            if (typeof data.userid != "undefined") {
-                this.notifyVue('top', 'center', '로그인 성공!', 'success');
-                this.$session.set('user', this.userid);
-                this.$router.push('/');
-            } else {
-                this.notifyVue('top', 'center', '로그인 실패!', 'danger');
-            }
+    userUpdate() {
+        axios
+            .put('http://localhost:9999/happyhouse/api/user/updateUser/', {
+                userid: this.item.userid,
+                userpwd: this.userpwd,
+                username: this.item.username,
+                phone: this.item.phone,
+                address: this.item.address,
+            })
+            .then(({ data }) => {
+                if (data === 'success') {
+                    this.notifyVue('top', 'center', '회원 정보 수정이 정상적으로 처리되었습니다.', 'success');
+                    this.$router.push('/');
+                } else {
+                    this.notifyVue('top', 'center', '회원 정보 수정 도중 에러가 발생했습니다.', 'danger');
+                }
         });
     },
   }
