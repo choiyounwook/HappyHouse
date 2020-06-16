@@ -2,7 +2,7 @@
   <form>
     <md-card>
       <md-card-header :data-background-color="dataBackgroundColor">
-        <h4 class="title">Log In</h4>
+        <h4 class="title">비밀번호 찾기</h4>
         <p class="category">Complete your profile</p>
       </md-card-header>
 
@@ -16,17 +16,12 @@
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>Password</label>
-              <md-input v-model="userpwd" type="password"></md-input>
+              <label>이름</label>
+              <md-input v-model="username" type="text"></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-size-50 text-right">
-            <md-button class="md-raised md-success" @click="check">로그인</md-button>
-          </div>
-          <div class="md-layout-item md-size-50 text-left">
-              <router-link to="/findpassword">
-                <md-button class="md-raised md-success">비밀번호 찾기</md-button>
-              </router-link>
+          <div class="md-layout-item md-size-100 text-right">
+            <md-button class="md-raised md-success" @click="check">비밀번호 찾기</md-button>
           </div>
         </div>
       </md-card-content>
@@ -38,7 +33,7 @@
 import axios from 'axios';
 
 export default {
-  name: "log-in-form",
+  name: "find-password-form",
 
   props: {
     dataBackgroundColor: {
@@ -50,7 +45,7 @@ export default {
   data() {
     return {
       userid: null,
-      userpwd: null,
+      username: null,
     };
   },
 
@@ -66,19 +61,20 @@ export default {
     },
 
     check() {
-      if (!this.userid || !this.userpwd) {
+      if (!this.userid || !this.username) {
         this.notifyVue('top', 'center', '빠진항목이 있습니다.', 'danger');
       } else {
-          this.logIn()
+          this.findPassword()
       }
     },
 
-    logIn() {
-        axios.get('http://localhost:9999/happyhouse/api/user/login/' + this.userid + '&' + this.userpwd).then(({ data }) => {
-            if (typeof data.userid != "undefined") {
-                this.notifyVue('top', 'center', '로그인 성공!', 'success');
+    findPassword() {
+        axios.get('http://localhost:9999/happyhouse/api/user/searchpwd/' + this.userid + '&' + this.username).then(({ data }) => {
+            if (data != "") {
+                alert('회원님의 비밀번호는 ' + data);
+                this.$router.push('/');
             } else {
-                this.notifyVue('top', 'center', '로그인 실패!', 'danger');
+                this.notifyVue('top', 'center', '입력하신 정보와 맞는 회원정보가 없습니다.', 'danger');
             }
         });
     },

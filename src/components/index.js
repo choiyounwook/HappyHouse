@@ -16,6 +16,7 @@ import SimpleNotice from "./Notices/SimpleNotice.vue";
 // Customs
 import SignUpForm from "./Customs/SignUpForm.vue";
 import LogInForm from "./Customs/LogInForm.vue";
+import FindPasswordForm from "./Customs/FindPasswordForm.vue";
 
 // QnA
 import SimpleQnA from "./QnA/SimpleQnA.vue";
@@ -32,5 +33,6 @@ export {
   SimpleNotice,
   SignUpForm,
   LogInForm,
-  SimpleQnA
+  SimpleQnA,
+  FindPasswordForm,
 };
