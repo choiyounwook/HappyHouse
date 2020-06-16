@@ -15,6 +15,7 @@ import SimpleNotice from "./Notices/SimpleNotice.vue";
 
 // Customs
 import SignUpForm from "./Customs/SignUpForm.vue";
+import LogInForm from "./Customs/LogInForm.vue";
 
 export {
   ChartCard,
@@ -26,5 +27,6 @@ export {
   NavTabsNotice,
   OrderedNotice,
   SimpleNotice,
-  SignUpForm
+  SignUpForm,
+  LogInForm
 };
