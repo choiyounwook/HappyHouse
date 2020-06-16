@@ -43,6 +43,10 @@
         <md-icon>notifications</md-icon>
         <p>QnA</p>
       </sidebar-link>
+      <sidebar-link to="/signup">
+        <md-icon>notifications</md-icon>
+        <p>Sign Up</p>
+      </sidebar-link>
       <sidebar-link to="/upgrade" class="active-pro">
         <md-icon>unarchive</md-icon>
         <p>Upgrade to PRO</p>

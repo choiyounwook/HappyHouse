@@ -18,6 +18,7 @@ import QnAList from "@/pages/QnAList.vue";
 import QnAReply from "@/pages/QnAReply.vue";
 import QnAUpdate from "@/pages/QnAUpdate.vue";
 import NoticeUpdate from "@/pages/NoticeUpdate.vue";
+import SignUp from "@/pages/SignUp.vue";
 
 const routes = [
   {
@@ -117,6 +118,11 @@ const routes = [
         path: "qnAUpdate",
         name: "QnAUpdate",
         component: QnAUpdate
+      },
+      {
+        path: "signup",
+        name: "SignUp",
+        component: SignUp
       }
     ]
   }

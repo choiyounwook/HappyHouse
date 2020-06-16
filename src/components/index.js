@@ -13,6 +13,8 @@ import NavTabsNotice from "./Notices/NavTabsNotice.vue";
 import OrderedNotice from "./Notices/OrderedNotice.vue";
 import SimpleNotice from "./Notices/SimpleNotice.vue";
 
+// Customs
+import SignUpForm from "./Customs/SignUpForm.vue";
 
 export {
   ChartCard,
@@ -23,5 +25,6 @@ export {
   SimpleTable,
   NavTabsNotice,
   OrderedNotice,
-  SimpleNotice
+  SimpleNotice,
+  SignUpForm
 };

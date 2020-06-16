@@ -70,6 +70,10 @@ const router = new VueRouter({
   linkExactActiveClass: "nav-item active"
 });
 
+// vue session
+import VueSession from 'vue-session'
+Vue.use(VueSession)
+
 Vue.prototype.$Chartist = Chartist;
 
 Vue.use(VueRouter);
