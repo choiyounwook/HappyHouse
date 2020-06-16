@@ -12,6 +12,11 @@ import HouseDeal from "@/pages/HouseDeal.vue";
 import NoticeList from "@/pages/NoticeList.vue";
 import NoticeDetail from "@/pages/NoticeDetail.vue";
 import NoticeAdd from "@/pages/NoticeAdd.vue";
+import QnAAdd from "@/pages/QnAAdd.vue";
+import QnADetail from "@/pages/QnADetail.vue";
+import QnAList from "@/pages/QnAList.vue";
+import QnAReply from "@/pages/QnAReply.vue";
+import QnAUpdate from "@/pages/QnAUpdate.vue";
 import NoticeUpdate from "@/pages/NoticeUpdate.vue";
 
 const routes = [
@@ -87,6 +92,31 @@ const routes = [
         path: "noticeUpdate",
         name: "NoticeUpdate",
         component: NoticeUpdate
+      },
+      {
+        path: "qnAAdd",
+        name: "QnAAdd",
+        component: QnAAdd
+      },
+      {
+        path: "qnADetail",
+        name: "QnADetail",
+        component: QnADetail
+      },
+      {
+        path: "qnAList",
+        name: "QnAList",
+        component: QnAList
+      },
+      {
+        path: "qnAReply",
+        name: "QnAReply",
+        component: QnAReply
+      },
+      {
+        path: "qnAUpdate",
+        name: "QnAUpdate",
+        component: QnAUpdate
       }
     ]
   }
