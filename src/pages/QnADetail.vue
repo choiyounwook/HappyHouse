@@ -2,18 +2,18 @@
   <div class="content">
     <div class="md-layout">
       <div class="md-layout-item md-medium-size-100 md-size-100">
-        <notice-info-form data-background-color="green"> </notice-info-form>
+        <QnAInfoForm data-background-color="green"> </QnAInfoForm>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import NoticeInfoForm from "@/pages/NoticeInfoForm.vue";
+import QnAInfoForm from "@/pages/QnAInfoForm.vue";
 
 export default {
   components: {
-    NoticeInfoForm
+    QnAInfoForm
   },
 };
 </script>

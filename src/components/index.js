@@ -17,6 +17,9 @@ import SimpleNotice from "./Notices/SimpleNotice.vue";
 import SignUpForm from "./Customs/SignUpForm.vue";
 import LogInForm from "./Customs/LogInForm.vue";
 
+// QnA
+import SimpleQnA from "./QnA/SimpleQnA.vue";
+
 export {
   ChartCard,
   NavTabsCard,
@@ -28,5 +31,6 @@ export {
   OrderedNotice,
   SimpleNotice,
   SignUpForm,
-  LogInForm
+  LogInForm,
+  SimpleQnA
 };

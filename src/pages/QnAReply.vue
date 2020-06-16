@@ -2,18 +2,18 @@
   <div class="content">
     <div class="md-layout">
       <div class="md-layout-item md-medium-size-100 md-size-100">
-        <NoticeUpdateForm data-background-color="green"> </NoticeUpdateForm>
+        <QnAReplyForm data-background-color="green"> </QnAReplyForm>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import NoticeUpdateForm from "@/pages/NoticeUpdateForm.vue";
+import QnAReplyForm from "@/pages/QnAReplyForm.vue";
 
 export default {
   components: {
-    NoticeUpdateForm
+    QnAReplyForm
   },
 };
 </script>

@@ -6,11 +6,11 @@
       >
         <md-card>
           <md-card-header data-background-color="green">
-            <h4 class="title">공지사항</h4>
+            <h4 class="title">질문 게시판</h4>
             <!-- <p class="category">Here is a subtitle for this table</p> -->
           </md-card-header>
           <md-card-content>
-            <simple-Notice table-header-color="green"></simple-Notice>
+            <SimpleQnA table-header-color="green"></SimpleQnA>
           </md-card-content>
         </md-card>
         
@@ -20,12 +20,12 @@
 </template>
 
 <script>
-import { SimpleNotice} from "@/components/";
+import { SimpleQnA} from "@/components/";
 
 
 export default {
   components: {
-    SimpleNotice
+    SimpleQnA
   }
 };
 </script>
