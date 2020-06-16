@@ -34,6 +34,12 @@
           
           <div class="md-layout-item md-size-100 text-right">
               <router-link to="/noticeList">
+                <md-button class="md-raised md-success" @click="deleteNotice()">삭제</md-button>
+              </router-link>
+              <router-link :to="'noticeUpdate?no=' + item.no">
+                <md-button class="md-raised md-success">수정</md-button>
+              </router-link>
+              <router-link to="/noticeList">
                 <md-button class="md-raised md-success">목록</md-button>
               </router-link>
           </div>
@@ -72,8 +78,8 @@ export default {
   },
 
   methods: {
-      moveList() {
-          this.$router.push('/#/NoticeList');
+      deleteNotice() {
+        axios.delete('http://localhost:9999/happyhouse/api/notice/' + this.$route.query.no);
       }
   }
 };

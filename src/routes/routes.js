@@ -12,6 +12,7 @@ import HouseDeal from "@/pages/HouseDeal.vue";
 import NoticeList from "@/pages/NoticeList.vue";
 import NoticeDetail from "@/pages/NoticeDetail.vue";
 import NoticeAdd from "@/pages/NoticeAdd.vue";
+import NoticeUpdate from "@/pages/NoticeUpdate.vue";
 
 const routes = [
   {
@@ -81,6 +82,11 @@ const routes = [
         path: "noticeAdd",
         name: "NoticeAdd",
         component: NoticeAdd
+      },
+      {
+        path: "noticeUpdate",
+        name: "NoticeUpdate",
+        component: NoticeUpdate
       }
     ]
   }

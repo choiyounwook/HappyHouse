@@ -2,16 +2,27 @@
   <form>
     <md-card>
       <md-card-header :data-background-color="dataBackgroundColor">
-        <h4 class="title">공지 사항 등록</h4>
+        <h4 class="title">공지 사항</h4>
       </md-card-header>
 
       <md-card-content>
         <div class="md-layout" >
-
+          <div class="md-layout-item md-small-size-100 md-size-20">
+            <md-field>
+              <label>글 번호</label>
+              <md-input v-model="item.no" disabled></md-input>
+            </md-field>
+          </div>
           <div class="md-layout-item md-small-size-100 md-size-60">
             <md-field>
               <label>글 제목</label>
               <md-input v-model="item.subject" ></md-input>
+            </md-field>
+          </div>
+          <div class="md-layout-item md-small-size-100 md-size-20">
+            <md-field>
+              <label>글 등록 날짜</label>
+              <md-input v-model="item.noticeTime" disabled></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
@@ -23,13 +34,9 @@
           
           <div class="md-layout-item md-size-100 text-right">
               <router-link to="/noticeList">
-                <template v-if="item.content==''||item.subject==''">
-                  <md-button class="md-raised md-success" disabled>등록</md-button>
-                </template>
-                <template v-if="item.content!=''&&item.subject!=''">
-                  <md-button class="md-raised md-success" @click=" onSubmit()">등록</md-button>
-                </template>
+                <md-button class="md-raised md-success" @click="updateNotice()">수정</md-button>
               </router-link>
+
           </div>
         </div>
       </md-card-content>
@@ -51,18 +58,21 @@ export default {
   },
   data() {
     return {
-      item: {
-        no: '',
-        subject: '',
-        content: '',
-        noticetime: ''
-      }
+      item: {},
+      date: '',
+      time: ''
     };
   },
-
+ created() {
+     // 파라미터 값을 찾는 코드
+    axios.get('http://localhost:9999/happyhouse/api/notice/' + this.$route.query.no).then(({ data }) => {
+      this.item = data;
+    });
+  },
   methods: {
-      onSubmit() {
-          axios.post('http://localhost:9999/happyhouse/api/notice',this.item);
+      updateNotice() {
+        console.log(this.item);
+        axios.put('http://localhost:9999/happyhouse/api/notice/updateNotice/'+ this.$route.query.no,this.item);
       }
   }
 };
