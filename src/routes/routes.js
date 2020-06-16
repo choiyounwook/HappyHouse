@@ -9,6 +9,8 @@ import Maps from "@/pages/Maps.vue";
 import Notifications from "@/pages/Notifications.vue";
 import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 import HouseDeal from "@/pages/HouseDeal.vue";
+import NoticeList from "@/pages/NoticeList.vue";
+import NoticeDetail from "@/pages/NoticeDetail.vue";
 
 const routes = [
   {
@@ -63,6 +65,16 @@ const routes = [
         path: "housedeal",
         name: "HouseDeal",
         component: HouseDeal
+      },
+      {
+        path: "noticeList",
+        name: "NoticeList",
+        component: NoticeList
+      },
+      {
+        path: "noticeDetal",
+        name: "NoticeDetail",
+        component: NoticeDetail
       }
     ]
   }

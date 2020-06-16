@@ -8,11 +8,20 @@ import NavTabsTable from "./Tables/NavTabsTable.vue";
 import OrderedTable from "./Tables/OrderedTable.vue";
 import SimpleTable from "./Tables/SimpleTable.vue";
 
+// Notices
+import NavTabsNotice from "./Notices/NavTabsNotice.vue";
+import OrderedNotice from "./Notices/OrderedNotice.vue";
+import SimpleNotice from "./Notices/SimpleNotice.vue";
+
+
 export {
   ChartCard,
   NavTabsCard,
   StatsCard,
   NavTabsTable,
   OrderedTable,
-  SimpleTable
+  SimpleTable,
+  NavTabsNotice,
+  OrderedNotice,
+  SimpleNotice
 };
