@@ -11,6 +11,7 @@ import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 import HouseDeal from "@/pages/HouseDeal.vue";
 import NoticeList from "@/pages/NoticeList.vue";
 import NoticeDetail from "@/pages/NoticeDetail.vue";
+import NoticeAdd from "@/pages/NoticeAdd.vue";
 
 const routes = [
   {
@@ -72,9 +73,14 @@ const routes = [
         component: NoticeList
       },
       {
-        path: "noticeDetal",
+        path: "noticeDetail",
         name: "NoticeDetail",
         component: NoticeDetail
+      },
+      {
+        path: "noticeAdd",
+        name: "NoticeAdd",
+        component: NoticeAdd
       }
     ]
   }
