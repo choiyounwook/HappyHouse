@@ -2,39 +2,63 @@
   <form>
     <md-card>
       <md-card-header :data-background-color="dataBackgroundColor">
-        <h4 class="title">공지 사항</h4>
+        <h4 class="title">질문 수정</h4>
       </md-card-header>
 
       <md-card-content>
         <div class="md-layout" >
-          <div class="md-layout-item md-small-size-100 md-size-20">
+        <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>글 번호</label>
-              <md-input v-model="item.no" disabled></md-input>
+              <label>질문 번호</label>
+              <md-input v-model="item.qnaNo" disabled></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-60">
+           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>글 제목</label>
-              <md-input v-model="item.subject" ></md-input>
+              <label>질문자</label>
+              <md-input v-model="item.qnaUserid" disabled></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-20">
+          <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>글 등록 날짜</label>
-              <md-input v-model="item.noticeTime" disabled></md-input>
+              <label>질문 등록 날짜</label>
+              <md-input v-model="item.qnaDatetime" disabled></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>글 내용</label>
-              <md-input v-model="item.content" ></md-input>
+              <label>제목</label>
+              <md-input v-model="item.qnaTitle" ></md-input>
+            </md-field>
+          </div>
+          <div class="md-layout-item md-small-size-100 md-size-100">
+            <md-field>
+              <label>질문 내용</label>
+              <md-input v-model="item.qnaContent" ></md-input>
+            </md-field>
+          </div>
+          <div class="md-layout-item md-small-size-100 md-size-100">
+            <md-field>
+              <label>답변자</label>
+              <md-input v-model="item.replyUserid" disabled></md-input>
+            </md-field>
+          </div> 
+          <div class="md-layout-item md-small-size-100 md-size-100">
+            <md-field>
+              <label>답변 등록 날짜</label>
+              <md-input v-model="item.replyDatetime" disabled></md-input>
+            </md-field>
+          </div>
+          <div class="md-layout-item md-small-size-100 md-size-100">
+            <md-field>
+              <label>답변 내용</label>
+              <md-input v-model="item.replyContent" disabled></md-input>
             </md-field>
           </div>
           
           <div class="md-layout-item md-size-100 text-right">
-              <router-link to="/noticeList">
-                <md-button class="md-raised md-success" @click="updateNotice()">수정</md-button>
+              <router-link :to="'qnAdetail?qnaNo=' + item.qnaNo">
+                <md-button class="md-raised md-success" @click="updateQnA()">수정</md-button>
               </router-link>
 
           </div>
@@ -65,14 +89,14 @@ export default {
   },
  created() {
      // 파라미터 값을 찾는 코드
-    axios.get('http://localhost:9999/happyhouse/api/notice/' + this.$route.query.no).then(({ data }) => {
+    axios.get('http://localhost:9999/happyhouse/api/qna/' + this.$route.query.no).then(({ data }) => {
       this.item = data;
     });
   },
   methods: {
-      updateNotice() {
+      updateQnA() {
         console.log(this.item);
-        axios.put('http://localhost:9999/happyhouse/api/notice/updateNotice/'+ this.$route.query.no,this.item);
+        axios.put('http://localhost:9999/happyhouse/api/qna/updateQnA/'+ this.$route.query.no,this.item);
       }
   }
 };

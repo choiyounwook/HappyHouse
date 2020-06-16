@@ -16,6 +16,9 @@ import SimpleNotice from "./Notices/SimpleNotice.vue";
 // Customs
 import SignUpForm from "./Customs/SignUpForm.vue";
 
+// QnA
+import SimpleQnA from "./QnA/SimpleQnA.vue";
+
 export {
   ChartCard,
   NavTabsCard,
@@ -26,5 +29,6 @@ export {
   NavTabsNotice,
   OrderedNotice,
   SimpleNotice,
-  SignUpForm
+  SignUpForm,
+  SimpleQnA
 };

@@ -2,44 +2,70 @@
   <form>
     <md-card>
       <md-card-header :data-background-color="dataBackgroundColor">
-        <h4 class="title">공지 사항</h4>
+        <h4 class="title">질문 게시판</h4>
       </md-card-header>
 
       <md-card-content>
         <div class="md-layout" >
-          <div class="md-layout-item md-small-size-100 md-size-20">
+          <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>글 번호</label>
-              <md-input v-model="item.no" disabled></md-input>
+              <label>질문 번호</label>
+              <md-input v-model="item.qnaNo" disabled></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-60">
+           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>글 제목</label>
-              <md-input v-model="item.subject" disabled></md-input>
+              <label>질문자</label>
+              <md-input v-model="item.qnaUserid" disabled></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-20">
+          <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>글 등록 날짜</label>
-              <md-input v-model="item.noticeTime" disabled></md-input>
+              <label>질문 등록 날짜</label>
+              <md-input v-model="item.qnaDatetime" disabled></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>글 내용</label>
-              <md-input v-model="item.content" disabled></md-input>
+              <label>제목</label>
+              <md-input v-model="item.qnaTitle" disabled></md-input>
             </md-field>
           </div>
-          
+          <div class="md-layout-item md-small-size-100 md-size-100">
+            <md-field>
+              <label>질문 내용</label>
+              <md-input v-model="item.qnaContent" disabled></md-input>
+            </md-field>
+          </div>
+          <div class="md-layout-item md-small-size-100 md-size-100">
+            <md-field>
+              <label>답변자</label>
+              <md-input v-model="item.replyUserid" disabled></md-input>
+            </md-field>
+          </div> 
+          <div class="md-layout-item md-small-size-100 md-size-100">
+            <md-field>
+              <label>답변 등록 날짜</label>
+              <md-input v-model="item.replyDatetime" disabled></md-input>
+            </md-field>
+          </div>
+          <div class="md-layout-item md-small-size-100 md-size-100">
+            <md-field>
+              <label>답변 내용</label>
+              <md-input v-model="item.replyContent" disabled></md-input>
+            </md-field>
+          </div>
           <div class="md-layout-item md-size-100 text-right">
-              <router-link to="/noticeList">
-                <md-button class="md-raised md-success" @click="deleteNotice()">삭제</md-button>
+              <router-link to="/qnAList">
+                <md-button class="md-raised md-success" @click="deleteQnA()">삭제</md-button>
               </router-link>
-              <router-link :to="'noticeUpdate?no=' + item.no">
+              <router-link :to="'QnAUpdate?no=' + item.qnaNo">
                 <md-button class="md-raised md-success">수정</md-button>
               </router-link>
-              <router-link to="/noticeList">
+              <router-link :to="'QnAReply?no=' + item.qnaNo">
+                <md-button class="md-raised md-success">답변</md-button>
+              </router-link>
+              <router-link to="/qnAList">
                 <md-button class="md-raised md-success">목록</md-button>
               </router-link>
           </div>
@@ -72,14 +98,14 @@ export default {
 
   created() {
      // 파라미터 값을 찾는 코드
-    axios.get('http://localhost:9999/happyhouse/api/notice/' + this.$route.query.no).then(({ data }) => {
+    axios.get('http://localhost:9999/happyhouse/api/qna/' + this.$route.query.qnaNo).then(({ data }) => {
       this.item = data;
     });
   },
 
   methods: {
-      deleteNotice() {
-        axios.delete('http://localhost:9999/happyhouse/api/notice/' + this.$route.query.no);
+      deleteQnA() {
+        axios.delete('http://localhost:9999/happyhouse/api/qna/' + this.$route.query.qnaNo);
       }
   }
 };
