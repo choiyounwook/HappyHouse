@@ -54,6 +54,13 @@ export default {
     };
   },
 
+  created() {
+      if (this.$session.exists()) {
+          console.log("세션 유지중");
+          console.log(this.$session.get('password'));
+      }
+  },
+
   methods: {
     notifyVue(verticalAlign, horizontalAlign, msg, type) {
       this.$notify({
@@ -77,6 +84,9 @@ export default {
         axios.get('http://localhost:9999/happyhouse/api/user/login/' + this.userid + '&' + this.userpwd).then(({ data }) => {
             if (typeof data.userid != "undefined") {
                 this.notifyVue('top', 'center', '로그인 성공!', 'success');
+                this.$session.set('user', this.userid);
+                this.$session.set('password', this.userpwd);
+                this.$router.push('/');
             } else {
                 this.notifyVue('top', 'center', '로그인 실패!', 'danger');
             }

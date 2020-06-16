@@ -21,6 +21,7 @@ import NoticeUpdate from "@/pages/NoticeUpdate.vue";
 import SignUp from "@/pages/SignUp.vue";
 import LogIn from "@/pages/LogIn.vue";
 import FindPassword from "@/pages/FindPassword.vue";
+import MyPage from "@/pages/MyPage.vue";
 
 const routes = [
   {
@@ -135,6 +136,11 @@ const routes = [
         path: "findpassword",
         name: "FindPassword",
         component: FindPassword
+      },
+      {
+        path: "mypage",
+        name: "MyPage",
+        component: MyPage
       },
     ]
   }
