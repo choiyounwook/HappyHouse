@@ -49,10 +49,7 @@
             </md-list-item> -->
 
             <li class="md-list-item">
-              <a
-                href="#/notifications"
-                class="md-list-item-router md-list-item-container md-button-clean dropdown"
-              >
+
                 <div class="md-list-item-content">
                   <drop-down>
                     <md-button
@@ -73,7 +70,7 @@
                     </ul>
                   </drop-down>
                 </div>
-              </a>
+              
             </li>
 
             <md-list-item href="#/user">
