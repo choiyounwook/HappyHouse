@@ -23,6 +23,21 @@
         </router-link>
     </div>
     </template>
+    
+    <div id="searchbar" class="md-layout-item md-small-size-100 md-size-50">
+      <md-field>
+        <label>검색</label>
+        <md-input v-model="keyword" type="text"></md-input>
+        <select v-model="searchType">
+          <option disabled value=""></option>
+          <option>주택 이름</option>
+          <option>동</option>
+        </select>
+      </md-field>
+      <div class="md-layout-item md-size-100 text-center">
+        <md-button class="md-raised md-success" @click="search">검색</md-button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -46,6 +61,8 @@ export default {
       pageNum: 0,
       pageSize: 10,
       page: 10,
+      keyword: '',
+      searchType: '',
     };
   },
     created() {
@@ -59,6 +76,15 @@ export default {
     },
     prevPage () {
       this.pageNum -= 1;
+    },
+
+    search() {
+      
+
+      axios.get('http://localhost:9999/happyhouse/api/housedeal/' + this.$route.query.no).then(({ data }) => {
+      this.item = data;
+      this.date = data.dealYear + '.' + data.dealMonth + '.' + data.dealDay;
+      });
     }
   },
   computed: {
@@ -87,5 +113,13 @@ export default {
 .pagination {
 }
 .page-item {
+}
+
+select {
+  border: 0px solid #66CCFF;
+}
+
+#searchbar {
+  margin: 0px auto;
 }
 </style>
