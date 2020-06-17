@@ -9,7 +9,7 @@
         <label>Search...</label>
       </md-autocomplete>
     </div> -->
-    <select v-model="selected">
+    <!-- <select v-model="selected">
       <option disabled value="">Please select one</option>
       <option>A</option>
       <option>B</option>
@@ -20,7 +20,7 @@
               <label>ID</label>
               <md-input v-model="userid" type="text"></md-input>
             </md-field>
-    </div>
+    </div> -->
 
     <md-table v-model="paginatedData" :table-header-color="tableHeaderColor">
       <md-table-row slot="md-table-row" slot-scope="{ item }">
@@ -50,6 +50,21 @@
     :container-class="'pagination'"
     :page-class="'page-item'">
     </paginate> -->
+
+    <div id="searchbar" class="md-layout-item md-small-size-100 md-size-50">
+      <md-field>
+        <label>검색</label>
+        <md-input v-model="keyword" type="text"></md-input>
+        <select v-model="searchType">
+          <option disabled value=""></option>
+          <option>주택 이름</option>
+          <option>동</option>
+        </select>
+      </md-field>
+      <div class="md-layout-item md-size-100 text-center">
+        <md-button class="md-raised md-success" @click="search">검색</md-button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -75,11 +90,17 @@ export default {
       page: 10,
       selected: '',
       userid: '',
+      keyword: '',
+      searchType: '',
     };
   },
     created() {
       axios.get('http://localhost:9999/happyhouse/api/housedeal').then(({ data }) => {
+        console.log('hi');
           this.items = data;
+          this.count = this.pageCount();
+          this.paginated = this.paginatedData();
+          console.log('count' + count);
         });
     },
   methods: {
@@ -88,9 +109,31 @@ export default {
     },
     prevPage () {
       this.pageNum -= 1;
-    }
+    },
+
+    search() {
+      console.log(this.searchType);
+      
+      if (this.searchType == '주택 이름') {
+        axios.get('http://localhost:9999/happyhouse/api/housedeal/aptname/' + this.keyword).then(({ data }) => {
+          console.log(data);
+          this.item = data;
+                    this.count = this.pageCount();
+          this.paginated = this.paginatedData();
+          console.log(this.pageCount());
+        });
+      } else if (this.searchType == '동') {
+        axios.get('http://localhost:9999/happyhouse/api/housedeal/dong/' + this.keyword).then(({ data }) => {
+          console.log(data);
+          this.item = data;
+          this.count = this.pageCount();
+          this.paginated = this.paginatedData();
+          console.log(this.pageCount());
+        });
+      }
+    },
   },
-  computed: {
+  computed: {    
     pageCount () {
       let listLeng = this.items.length,
           listSize = this.pageSize,
@@ -116,5 +159,13 @@ export default {
 .pagination {
 }
 .page-item {
+}
+
+select {
+  border: 0px solid #66CCFF;
+}
+
+#searchbar {
+  margin: 0px auto;
 }
 </style>
