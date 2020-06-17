@@ -40,7 +40,7 @@
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
               <label>답변자</label>
-              <md-input v-model="item.replyUserid"></md-input>
+              <md-input v-model="item.replyUserid" disabled></md-input>
             </md-field>
           </div> 
           <div class="md-layout-item md-small-size-100 md-size-100">
@@ -85,6 +85,7 @@ export default {
      // 파라미터 값을 찾는 코드
     axios.get('http://localhost:9999/happyhouse/api/qna/' + this.$route.query.no).then(({ data }) => {
       this.item = data;
+      this.item.replyUserid =this.$session.get('user');
     });
   },
   methods: {

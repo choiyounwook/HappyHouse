@@ -27,7 +27,7 @@
           </div>
           <md-list>
             <md-list-item href="#/">
-              <i class="material-icons">dashboard</i>
+              <i class="material-icons">home</i>
               <p class="hidden-lg hidden-md">Dashboard</p>
             </md-list-item>
 
@@ -60,7 +60,7 @@
                       class="md-button md-just-icon md-simple"
                       data-toggle="dropdown"
                     >
-                      <md-icon>notifications</md-icon>
+                      <md-icon>menu</md-icon>
                       <span class="notification">5</span>
                       <p class="hidden-lg hidden-md">Notifications</p>
                     </md-button>

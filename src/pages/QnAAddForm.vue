@@ -56,7 +56,7 @@ export default {
         qnaTitle: '',
         qnaContent: '',
         qnaDatetime: '',
-        qnaUserid: 'ssafy'
+        qnaUserid: this.$session.get('user')
       }
     };
   },
