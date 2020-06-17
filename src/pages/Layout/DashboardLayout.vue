@@ -47,6 +47,16 @@
         <md-icon>notifications</md-icon>
         <p>Sign Up</p>
       </sidebar-link>
+      <sidebar-link to="/login">
+        <md-icon>notifications</md-icon>
+        <p>Log In</p>
+      </sidebar-link>
+      <template v-if="this.$session.exists()">
+        <sidebar-link to="/mypage">
+          <md-icon>notifications</md-icon>
+          <p>My page</p>
+        </sidebar-link>
+      </template>
       <sidebar-link to="/upgrade" class="active-pro">
         <md-icon>unarchive</md-icon>
         <p>Upgrade to PRO</p>
