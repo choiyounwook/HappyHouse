@@ -17,7 +17,7 @@
         target="_blank"
         class="simple-text logo-normal"
       >
-        {{ title }}
+        Happy House
       </a>
     </div>
     <div class="sidebar-wrapper">
