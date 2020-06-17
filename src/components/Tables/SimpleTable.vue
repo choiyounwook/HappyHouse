@@ -1,5 +1,27 @@
 <template>
   <div>
+    <!-- <div class="md-autocomplete">
+      <md-autocomplete
+        class="search"
+        v-model="selectedEmployee"
+        :md-options="employees"
+      >
+        <label>Search...</label>
+      </md-autocomplete>
+    </div> -->
+    <select v-model="selected">
+      <option disabled value="">Please select one</option>
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select>
+    <div class="md-layout-item md-small-size-100 md-size-50">
+      <md-field>
+              <label>ID</label>
+              <md-input v-model="userid" type="text"></md-input>
+            </md-field>
+    </div>
+
     <md-table v-model="paginatedData" :table-header-color="tableHeaderColor">
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="번호">{{ item.no }}</md-table-cell>
@@ -47,10 +69,12 @@ export default {
   data() {
     return {
       items: [],
-      selected: [],
+      // selected: [],
       pageNum: 0,
       pageSize: 10,
       page: 10,
+      selected: '',
+      userid: '',
     };
   },
     created() {
