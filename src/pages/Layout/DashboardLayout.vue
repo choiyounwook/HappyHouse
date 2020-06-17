@@ -11,13 +11,25 @@
         <md-icon>dashboard</md-icon>
         <p>Dashboard</p>
       </sidebar-link>
-      <sidebar-link to="/user">
+      <!-- <sidebar-link to="/user">
         <md-icon>person</md-icon>
         <p>User Profile</p>
+      </sidebar-link> -->
+      <sidebar-link to="/user">
+        <md-icon>person</md-icon>
+        <p>My page</p>
       </sidebar-link>
       <sidebar-link to="/table">
         <md-icon>content_paste</md-icon>
-        <p>Table list</p>
+        <p>Infomation</p>
+      </sidebar-link>
+      <sidebar-link to="/noticeList">
+        <md-icon>notifications</md-icon>
+        <p>Notice</p>
+      </sidebar-link>
+      <sidebar-link to="/qnAList">
+        <md-icon>notifications</md-icon>
+        <p>QnA</p>
       </sidebar-link>
       <sidebar-link to="/typography">
         <md-icon>library_books</md-icon>
@@ -35,28 +47,14 @@
         <md-icon>notifications</md-icon>
         <p>Notifications</p>
       </sidebar-link>
-      <sidebar-link to="/noticeList">
-        <md-icon>notifications</md-icon>
-        <p>Notice</p>
-      </sidebar-link>
-      <sidebar-link to="/qnAList">
-        <md-icon>notifications</md-icon>
-        <p>QnA</p>
-      </sidebar-link>
-      <sidebar-link to="/signup">
+      <!-- <sidebar-link to="/signup">
         <md-icon>notifications</md-icon>
         <p>Sign Up</p>
       </sidebar-link>
       <sidebar-link to="/login">
         <md-icon>notifications</md-icon>
         <p>Log In</p>
-      </sidebar-link>
-      <template v-if="this.$session.exists()">
-        <sidebar-link to="/mypage">
-          <md-icon>notifications</md-icon>
-          <p>My page</p>
-        </sidebar-link>
-      </template>
+      </sidebar-link> -->
       <sidebar-link to="/upgrade" class="active-pro">
         <md-icon>unarchive</md-icon>
         <p>Upgrade to PRO</p>

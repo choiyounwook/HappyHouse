@@ -23,9 +23,6 @@
           <div class="md-layout-item md-size-100 text-right">
             <md-button class="md-raised md-success" @click="check">비밀번호 찾기</md-button>
           </div>
-          <div class="md-layout-item md-size-100 text-right">
-            <md-button class="md-raised md-success" @click="logout">로그 아웃</md-button>
-          </div>
         </div>
       </md-card-content>
     </md-card>
@@ -81,10 +78,6 @@ export default {
             }
         });
     },
-
-    logout() {
-        this.$session.destroy();
-    }
   }
 };
 </script>

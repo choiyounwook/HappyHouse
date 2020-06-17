@@ -3,7 +3,7 @@
     <md-card>
       <md-card-header :data-background-color="dataBackgroundColor">
         <h4 class="title">My Page</h4>
-        <p class="category">Complete your profile</p>
+        <!-- <p class="category">Complete your profile</p> -->
       </md-card-header>
 
       <md-card-content>
@@ -38,14 +38,16 @@
               <md-input v-model="item.address" type="text" disabled></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-size-50 text-right">
+          <div class="md-layout-item md-size-100 text-center">
               <router-link to="/useredit">
                 <md-button class="md-raised md-success">수정</md-button>
               </router-link>
+              <md-button class="md-raised md-success" @click="deleteUser">탈퇴</md-button>
+              <md-button class="md-raised md-success" @click="logout">로그아웃</md-button>
           </div>
-          <div class="md-layout-item md-size-50 text-left">
+          <!-- <div class="md-layout-item md-size-50 text-left">
             <md-button class="md-raised md-success" @click="deleteUser">탈퇴</md-button>
-          </div>
+          </div> -->
         </div>
       </md-card-content>
     </md-card>
@@ -108,25 +110,31 @@ export default {
         });
     },
 
-    check() {
-      if (!this.userid || !this.userpwd) {
-        this.notifyVue('top', 'center', '빠진항목이 있습니다.', 'danger');
-      } else {
-          this.logIn()
-      }
+    logout() {
+      this.$session.destroy();
+      this.notifyVue('top', 'center', '로그아웃 되었습니다.', 'success');
+      this.$router.push('/');
     },
 
-    logIn() {
-        axios.get('http://localhost:9999/happyhouse/api/user/login/' + this.userid + '&' + this.userpwd).then(({ data }) => {
-            if (typeof data.userid != "undefined") {
-                this.notifyVue('top', 'center', '로그인 성공!', 'success');
-                this.$session.set('user', this.userid);
-                this.$router.push('/');
-            } else {
-                this.notifyVue('top', 'center', '로그인 실패!', 'danger');
-            }
-        });
-    },
+    // check() {
+    //   if (!this.userid || !this.userpwd) {
+    //     this.notifyVue('top', 'center', '빠진항목이 있습니다.', 'danger');
+    //   } else {
+    //       this.logIn()
+    //   }
+    // },
+
+    // logIn() {
+    //     axios.get('http://localhost:9999/happyhouse/api/user/login/' + this.userid + '&' + this.userpwd).then(({ data }) => {
+    //         if (typeof data.userid != "undefined") {
+    //             this.notifyVue('top', 'center', '로그인 성공!', 'success');
+    //             this.$session.set('user', this.userid);
+    //             this.$router.push('/');
+    //         } else {
+    //             this.notifyVue('top', 'center', '로그인 실패!', 'danger');
+    //         }
+    //     });
+    // },
   }
 };
 </script>

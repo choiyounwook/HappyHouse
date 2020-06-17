@@ -23,6 +23,7 @@ import LogIn from "@/pages/LogIn.vue";
 import FindPassword from "@/pages/FindPassword.vue";
 import MyPage from "@/pages/MyPage.vue";
 import UserEdit from "@/pages/UserEdit.vue";
+import User from "@/pages/User.vue";
 
 const routes = [
   {
@@ -36,7 +37,7 @@ const routes = [
         component: Dashboard
       },
       {
-        path: "user",
+        path: "userprofile",
         name: "User Profile",
         component: UserProfile
       },
@@ -125,28 +126,33 @@ const routes = [
       },
       {
         path: "signup",
-        name: "SignUp",
+        name: "Sign Up",
         component: SignUp
       },
       {
         path: "login",
-        name: "LogIn",
+        name: "Log In",
         component: LogIn
       },
       {
         path: "findpassword",
-        name: "FindPassword",
+        name: "Find Password",
         component: FindPassword
       },
       {
         path: "mypage",
-        name: "MyPage",
+        name: "My Page",
         component: MyPage
       },
       {
         path: "useredit",
-        name: "UserEdit",
+        name: "User Edit",
         component: UserEdit
+      },
+      {
+        path: "user",
+        name: "User",
+        component: User
       },
     ]
   }

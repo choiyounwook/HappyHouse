@@ -3,7 +3,7 @@
     <md-card>
       <md-card-header :data-background-color="dataBackgroundColor">
         <h4 class="title">Log In</h4>
-        <p class="category">Complete your profile</p>
+        <!-- <p class="category">Complete your profile</p> -->
       </md-card-header>
 
       <md-card-content>
@@ -20,14 +20,20 @@
               <md-input v-model="userpwd" type="password"></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-size-50 text-right">
+          <div class="md-layout-item md-size-100 text-center">
             <md-button class="md-raised md-success" @click="check">로그인</md-button>
+            <router-link to="/findpassword">
+              <md-button class="md-raised md-success">비밀번호 찾기</md-button>
+            </router-link>
+            <router-link to="/signup">
+              <md-button class="md-raised md-success">회원가입</md-button>
+            </router-link>
           </div>
-          <div class="md-layout-item md-size-50 text-left">
+          <!-- <div class="md-layout-item md-size-50 text-left">
               <router-link to="/findpassword">
                 <md-button class="md-raised md-success">비밀번호 찾기</md-button>
               </router-link>
-          </div>
+          </div> -->
         </div>
       </md-card-content>
     </md-card>
@@ -83,12 +89,12 @@ export default {
     logIn() {
         axios.get('http://localhost:9999/happyhouse/api/user/login/' + this.userid + '&' + this.userpwd).then(({ data }) => {
             if (typeof data.userid != "undefined") {
-                this.notifyVue('top', 'center', '로그인 성공!', 'success');
+                this.notifyVue('top', 'center', '로그인 되었습니다.', 'success');
                 this.$session.set('user', this.userid);
                 this.$session.set('password', this.userpwd);
                 this.$router.push('/');
             } else {
-                this.notifyVue('top', 'center', '로그인 실패!', 'danger');
+                this.notifyVue('top', 'center', '로그인 하는데 에러가 발생했습니다.', 'danger');
             }
         });
     },

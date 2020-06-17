@@ -128,6 +128,7 @@ export default {
             })
             .then(({ data }) => {
                 if (data === 'success') {
+                    this.$session.set('password', this.userpwd);
                     this.notifyVue('top', 'center', '회원 정보 수정이 정상적으로 처리되었습니다.', 'success');
                     this.$router.push('/');
                 } else {
