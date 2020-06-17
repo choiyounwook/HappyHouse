@@ -19,10 +19,10 @@
         <md-icon>person</md-icon>
         <p>My page</p>
       </sidebar-link>
-      <sidebar-link to="/table">
+      <!-- <sidebar-link to="/table">
         <md-icon>content_paste</md-icon>
         <p>Infomation</p>
-      </sidebar-link>
+      </sidebar-link> -->
       <sidebar-link to="/noticeList">
         <md-icon>notifications</md-icon>
         <p>Notice</p>
@@ -31,7 +31,7 @@
         <md-icon>library_books</md-icon>
         <p>QnA</p>
       </sidebar-link>
-      <sidebar-link to="/typography">
+      <!-- <sidebar-link to="/typography">
         <md-icon>library_books</md-icon>
         <p>Typography</p>
       </sidebar-link>
@@ -46,7 +46,7 @@
       <sidebar-link to="/notifications">
         <md-icon>notifications</md-icon>
         <p>Notifications</p>
-      </sidebar-link>
+      </sidebar-link> -->
       <!-- <sidebar-link to="/signup">
         <md-icon>notifications</md-icon>
         <p>Sign Up</p>
