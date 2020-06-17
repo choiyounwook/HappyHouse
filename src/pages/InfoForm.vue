@@ -2,10 +2,23 @@
   <form>
     <md-card>
       <md-card-header :data-background-color="dataBackgroundColor">
-        <h4 class="title">거래 주택</h4>
+        <div class="md-layout-item md-small-size-100 md-size-50">
+          <h4 class="title">거래 주택</h4>
+        </div>
+        <template v-if="bookmark">
+        <md-button  >
+          <md-icon style="color:green" >thumb_up</md-icon>
+        </md-button>
+        </template>
+         <template v-if="!bookmark">
+        <md-button @click="bookmarkselect()">
+          <md-icon style="color:white">thumb_up</md-icon>
+        </md-button>
+        </template>
       </md-card-header>
 
       <md-card-content>
+        
         <div class="md-layout" >
           <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
@@ -114,7 +127,13 @@ export default {
       date: '',
       lat: '',
       lng: '',
-      flag: false
+      flag: false,
+      bookmark:false,
+      bookmarks:{
+        bookmark_no: 0,
+        userid: this.$session.get('user'),
+        house_no: 0
+      }
     };
   },
 
@@ -130,6 +149,14 @@ export default {
           this.lng = data.lng;
           this.flag = true;
         }
+        //bookmark =this.$session.get('bookmarks');
+        this.$session.get('bookmarks').forEach(element => {
+          if(element.house_no==this.item.no)
+          {
+            bookmark=true;
+            this.bookmarks.bookmark_no=element.bookmark_no;
+          }
+        });
       });
     });
   },
@@ -137,7 +164,20 @@ export default {
   methods: {
       moveList() {
           this.$router.push('/#/housedeal');
+      },
+      bookmarkcancel(){
+          axios.get('http://localhost:9999/happyhouse/api/bookmark/'+this.userid).then(({ data }) => {
+            this.$session.set('bookmarks', data);
+            console.log(this.$session.get('bookmarks').length);
+          });
+      },
+      bookmarkselect(){
+        this.bookmarks.house_no= this.item.no;
+        console.log(this.bookmarks.house_no);
+        console.log(this.bookmarks.userid);
+        axios.post('http://localhost:9999/happyhouse/api/bookmark',this.bookmarks);
       }
+
   }
 };
 </script>

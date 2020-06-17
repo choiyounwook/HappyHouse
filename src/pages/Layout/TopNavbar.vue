@@ -58,7 +58,9 @@
                       data-toggle="dropdown"
                     >
                       <md-icon>menu</md-icon>
-                      <span class="notification">5</span>
+                      <template v-if="this.$session.exists()&&bookmarkSize!=0">
+                      <span class="notification">{{bookmarkSize}}</span>
+                      </template>
                       <p class="hidden-lg hidden-md">Notifications</p>
                     </md-button>
                     <ul class="dropdown-menu dropdown-menu-right">
@@ -98,7 +100,8 @@ export default {
         "Kelly Kapoor",
         "Ryan Howard",
         "Kevin Malone"
-      ]
+      ],
+      bookmarkSize : this.$session.get('bookmarks').length
     };
   },
   methods: {
