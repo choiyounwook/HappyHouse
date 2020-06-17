@@ -57,6 +57,7 @@ export default {
     return {
       userid: null,
       userpwd: null,
+      items: []
     };
   },
 
@@ -93,10 +94,15 @@ export default {
                 this.$session.set('user', this.userid);
                 this.$session.set('password', this.userpwd);
                 this.$router.push('/');
+                axios.get('http://localhost:9999/happyhouse/api/bookmark/'+this.userid).then(({ data }) => {
+                 this.$session.set('bookmarks', data);
+                 console.log(this.$session.get('bookmarks').length);
+                 });
             } else {
                 this.notifyVue('top', 'center', '로그인 하는데 에러가 발생했습니다.', 'danger');
             }
         });
+
     },
   }
 };
