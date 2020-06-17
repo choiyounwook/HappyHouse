@@ -56,15 +56,21 @@
             </md-field>
           </div>
           <div class="md-layout-item md-size-100 text-right">
+            <template v-if="this.$session.get('user')==item.qnaUserid||this.$session.get('user')=='admin'">
               <router-link to="/qnAList">
                 <md-button class="md-raised md-success" @click="deleteQnA()">삭제</md-button>
               </router-link>
+            </template>
+               <template v-if="this.$session.get('user')==item.qnaUserid">
               <router-link :to="'QnAUpdate?no=' + item.qnaNo">
                 <md-button class="md-raised md-success">수정</md-button>
               </router-link>
+            </template>
+            <template v-if="this.$session.get('user')=='admin'">
               <router-link :to="'QnAReply?no=' + item.qnaNo">
                 <md-button class="md-raised md-success">답변</md-button>
               </router-link>
+            </template>
               <router-link to="/qnAList">
                 <md-button class="md-raised md-success">목록</md-button>
               </router-link>

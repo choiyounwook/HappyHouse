@@ -8,8 +8,8 @@
     >
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/dashboard">
-        <md-icon>dashboard</md-icon>
-        <p>Dashboard</p>
+        <md-icon>home</md-icon>
+        <p>HOME</p>
       </sidebar-link>
       <!-- <sidebar-link to="/user">
         <md-icon>person</md-icon>
@@ -28,7 +28,7 @@
         <p>Notice</p>
       </sidebar-link>
       <sidebar-link to="/qnAList">
-        <md-icon>notifications</md-icon>
+        <md-icon>library_books</md-icon>
         <p>QnA</p>
       </sidebar-link>
       <sidebar-link to="/typography">

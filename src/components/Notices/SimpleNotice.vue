@@ -16,11 +16,13 @@
         다음
       </button>
     </div>
+    <template v-if="this.$session.get('user')=='admin'">
     <div class="md-layout-item md-size-100 text-right">
         <router-link to="/noticeAdd">
           <md-button class="md-raised md-success">등록</md-button>
         </router-link>
     </div>
+    </template>
   </div>
 </template>
 
