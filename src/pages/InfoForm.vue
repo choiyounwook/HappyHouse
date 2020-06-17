@@ -6,7 +6,7 @@
           <h4 class="title">거래 주택</h4>
         </div>
         <template v-if="bookmark">
-        <md-button  >
+        <md-button   @click="bookmarkcancel()">
           <md-icon style="color:green" >thumb_up</md-icon>
         </md-button>
         </template>
@@ -149,16 +149,21 @@ export default {
           this.lng = data.lng;
           this.flag = true;
         }
-        //bookmark =this.$session.get('bookmarks');
-        this.$session.get('bookmarks').forEach(element => {
-          if(element.house_no==this.item.no)
-          {
-            bookmark=true;
-            this.bookmarks.bookmark_no=element.bookmark_no;
-          }
-        });
       });
     });
+    console.log(this.item.no);
+            //bookmark =this.$session.get('bookmarks');
+        this.$session.get('bookmarks').forEach(element => {
+          console.log(element.house_no);
+          console.log(this.item.no);
+          console.log("++++++++++");
+          if(element.house_no==this.item.no)
+          {
+            this.bookmark=true;
+            this.bookmarks.bookmark_no=element.bookmark_no;
+            console.log("this.bookmark");
+          }
+        });
   },
 
   methods: {
@@ -166,16 +171,16 @@ export default {
           this.$router.push('/#/housedeal');
       },
       bookmarkcancel(){
-          axios.get('http://localhost:9999/happyhouse/api/bookmark/'+this.userid).then(({ data }) => {
-            this.$session.set('bookmarks', data);
-            console.log(this.$session.get('bookmarks').length);
-          });
+          this.bookmark =false;
+          console.log(this.bookmark);
       },
       bookmarkselect(){
         this.bookmarks.house_no= this.item.no;
         console.log(this.bookmarks.house_no);
         console.log(this.bookmarks.userid);
         axios.post('http://localhost:9999/happyhouse/api/bookmark',this.bookmarks);
+        this.bookmark =true;
+        console.log(this.bookmark);
       }
 
   }
