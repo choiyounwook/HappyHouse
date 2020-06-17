@@ -30,7 +30,6 @@
 import axios from 'axios';
 import Paginate from 'vuejs-paginate';
 
-
 export default {
   name: "simple-table",
   props: {
@@ -59,7 +58,7 @@ export default {
     },
     prevPage () {
       this.pageNum -= 1;
-    }
+    },
   },
   computed: {
     pageCount () {
@@ -88,4 +87,5 @@ export default {
 }
 .page-item {
 }
+
 </style>
