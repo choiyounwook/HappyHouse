@@ -9,6 +9,9 @@
         <md-table-cell md-label="거래종류">{{ item.type }}</md-table-cell>
       </md-table-row>
     </md-table>
+    <div id="loading" v-if="loadingFlag">
+      <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+    </div>
     <div class="btn-cover">
       <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
         이전
@@ -38,16 +41,22 @@
 <script>
 import axios from 'axios';
 import Paginate from 'vuejs-paginate';
-
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 export default {
   name: "simple-table",
+
+  components: {
+    PulseLoader
+  },
+
   props: {
     tableHeaderColor: {
       type: String,
       default: ""
     }
   },
+
   data() {
     return {
       items: [],
@@ -58,11 +67,14 @@ export default {
       userid: '',
       keyword: '',
       searchType: '',
+      loadingFlag: false,
     };
   },
     created() {
+      this.loadingFlag = true;
       axios.get('http://localhost:9999/happyhouse/api/housedeal').then(({ data }) => {
           this.items = data;
+          this.loadingFlag = false;
         });
     },
   methods: {
@@ -84,20 +96,25 @@ export default {
     },
 
     search() {
+      this.loadingFlag = true;
       if (!this.searchType) {
         this.notifyVue('top', 'center', '검색 타입을 선택해야 합니다.', 'danger');
+        this.loadingFlag = false;
       } else if (!this.keyword) {
         axios.get('http://localhost:9999/happyhouse/api/housedeal').then(({ data }) => {
           this.items = data;
         });
+        this.loadingFlag = false;
       }else if (this.searchType == '주택 이름') {
         axios.get('http://localhost:9999/happyhouse/api/housedeal/aptname/' + this.keyword).then(({ data }) => {
           this.items = data;
         });
+        this.loadingFlag = false;
       } else if (this.searchType == '동') {
         axios.get('http://localhost:9999/happyhouse/api/housedeal/dong/' + this.keyword).then(({ data }) => {
           this.items = data;
         });
+        this.loadingFlag = false;
       } 
     },
   },
@@ -131,6 +148,11 @@ export default {
 
 select {
   border: 0px solid #66CCFF;
+}
+
+#loading {
+  width: 60px;
+  margin: 0px auto;
 }
 
 #searchbar {
