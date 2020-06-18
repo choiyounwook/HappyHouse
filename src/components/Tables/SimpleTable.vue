@@ -1,27 +1,5 @@
 <template>
   <div>
-    <!-- <div class="md-autocomplete">
-      <md-autocomplete
-        class="search"
-        v-model="selectedEmployee"
-        :md-options="employees"
-      >
-        <label>Search...</label>
-      </md-autocomplete>
-    </div> -->
-    <!-- <select v-model="selected">
-      <option disabled value="">Please select one</option>
-      <option>A</option>
-      <option>B</option>
-      <option>C</option>
-    </select>
-    <div class="md-layout-item md-small-size-100 md-size-50">
-      <md-field>
-              <label>ID</label>
-              <md-input v-model="userid" type="text"></md-input>
-            </md-field>
-    </div> -->
-
     <md-table v-model="paginatedData" :table-header-color="tableHeaderColor">
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="번호">{{ item.no }}</md-table-cell>
@@ -40,17 +18,6 @@
         다음
       </button>
     </div>
-    <!-- <paginate
-    :page-count="20"
-    :page-range="3"
-    :margin-pages="2"
-    :click-handler="clickCallback"
-    :prev-text="'Prev'"
-    :next-text="'Next'"
-    :container-class="'pagination'"
-    :page-class="'page-item'">
-    </paginate> -->
-
     <div id="searchbar" class="md-layout-item md-small-size-100 md-size-50">
       <md-field>
         <label>검색</label>
@@ -84,7 +51,6 @@ export default {
   data() {
     return {
       items: [],
-      // selected: [],
       pageNum: 0,
       pageSize: 10,
       page: 10,
@@ -96,14 +62,20 @@ export default {
   },
     created() {
       axios.get('http://localhost:9999/happyhouse/api/housedeal').then(({ data }) => {
-        console.log('hi');
           this.items = data;
-          this.count = this.pageCount();
-          this.paginated = this.paginatedData();
-          console.log('count' + count);
         });
     },
   methods: {
+    notifyVue(verticalAlign, horizontalAlign, msg, type) {
+      this.$notify({
+        message: msg,
+        icon: "add_alert",
+        horizontalAlign: horizontalAlign,
+        verticalAlign: verticalAlign,
+        type: type
+      });
+    },
+
     nextPage () {
       this.pageNum += 1;
     },
@@ -112,25 +84,21 @@ export default {
     },
 
     search() {
-      console.log(this.searchType);
-      
-      if (this.searchType == '주택 이름') {
+      if (!this.searchType) {
+        this.notifyVue('top', 'center', '검색 타입을 선택해야 합니다.', 'danger');
+      } else if (!this.keyword) {
+        axios.get('http://localhost:9999/happyhouse/api/housedeal').then(({ data }) => {
+          this.items = data;
+        });
+      }else if (this.searchType == '주택 이름') {
         axios.get('http://localhost:9999/happyhouse/api/housedeal/aptname/' + this.keyword).then(({ data }) => {
-          console.log(data);
-          this.item = data;
-                    this.count = this.pageCount();
-          this.paginated = this.paginatedData();
-          console.log(this.pageCount());
+          this.items = data;
         });
       } else if (this.searchType == '동') {
         axios.get('http://localhost:9999/happyhouse/api/housedeal/dong/' + this.keyword).then(({ data }) => {
-          console.log(data);
-          this.item = data;
-          this.count = this.pageCount();
-          this.paginated = this.paginatedData();
-          console.log(this.pageCount());
+          this.items = data;
         });
-      }
+      } 
     },
   },
   computed: {    
