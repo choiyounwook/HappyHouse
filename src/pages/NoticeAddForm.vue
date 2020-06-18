@@ -61,8 +61,24 @@ export default {
   },
 
   methods: {
+    notifyVue(verticalAlign, horizontalAlign, msg, type) {
+      this.$notify({
+        message: msg,
+        icon: "add_alert",
+        horizontalAlign: horizontalAlign,
+        verticalAlign: verticalAlign,
+        type: type
+      });
+    },
       onSubmit() {
-          axios.post('http://localhost:9999/happyhouse/api/notice',this.item);
+          axios.post('http://localhost:9999/happyhouse/api/notice',this.item).then(({data}) => {
+          let msg = 'fail';
+            if (data === 'success') {
+              this.notifyVue('top', 'center', '공지사항 등록이 정상적으로 처리되었습니다.', 'success');
+            } else {
+              this.notifyVue('top', 'center', '공지사항 등록 처리 도중 에러가 발생했습니다.', 'danger');
+            }
+        });
       }
   }
 };

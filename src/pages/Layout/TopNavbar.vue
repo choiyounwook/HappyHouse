@@ -59,16 +59,12 @@
                     >
                       <md-icon>menu</md-icon>
                       <template v-if="this.$session.exists()&&bookmarkSize!=0">
-                      <span class="notification">{{bookmarkSize}}</span>
+                      <span class="notification">{{this.$session.get('bookmarks').length}}</span>
                       </template>
                       <p class="hidden-lg hidden-md">Notifications</p>
                     </md-button>
                     <ul class="dropdown-menu dropdown-menu-right">
-                      <li><a href="#">Mike John responded to your email</a></li>
-                      <li><a href="#">You have 5 new tasks</a></li>
-                      <li><a href="#">You're now friend with Andrew</a></li>
-                      <li><a href="#">Another Notification</a></li>
-                      <li><a href="#">Another One</a></li>
+                      <li v-for="bookmark in this.$session.get('bookmarks')" v-bind:key="bookmark"><router-link :to="'housedeal?no=' + bookmark.house_no">{{bookmark.house_name}} </router-link></li>
                     </ul>
                   </drop-down>
                 </div>

@@ -4,17 +4,28 @@
       <md-card-header :data-background-color="dataBackgroundColor">
         <div class="md-layout-item md-small-size-100 md-size-50">
           <h4 class="title">거래 주택</h4>
+          <template v-if="bookmark&&this.$session.exists()">
+          <button @click="bookmarkcancel()" style="background-color:white;
+                                                   border-top-left-radius: 5px; 
+                                                   border-bottom-left-radius: 5px;
+                                                   border-top-right-radius: 5px;
+                                                   border-bottom-right-radius: 5px;
+                                                   border: 0px">
+          <md-icon style="color:green" @click="bookmarkcancel()">thumb_up</md-icon>
+          </button>
+        </template>
+         <template v-if="!bookmark&&this.$session.exists()">
+          <button @click="bookmarkselect()" style="background-color:white;
+                                                   border-top-left-radius: 5px; 
+                                                   border-bottom-left-radius: 5px;
+                                                   border-top-right-radius: 5px;
+                                                   border-bottom-right-radius: 5px;
+                                                   border: 0px">
+          <md-icon style="color:gray">thumb_up</md-icon>
+          </button>
+        </template>
         </div>
-        <template v-if="bookmark">
-        <md-button   @click="bookmarkcancel()">
-          <md-icon style="color:green" >thumb_up</md-icon>
-        </md-button>
-        </template>
-         <template v-if="!bookmark">
-        <md-button @click="bookmarkselect()">
-          <md-icon style="color:white">thumb_up</md-icon>
-        </md-button>
-        </template>
+        
       </md-card-header>
 
       <md-card-content>
@@ -132,7 +143,8 @@ export default {
       bookmarks:{
         bookmark_no: 0,
         userid: this.$session.get('user'),
-        house_no: 0
+        house_no: 0,
+        house_name :''
       }
     };
   },
@@ -142,7 +154,13 @@ export default {
     axios.get('http://localhost:9999/happyhouse/api/housedeal/' + this.$route.query.no).then(({ data }) => {
       this.item = data;
       this.date = data.dealYear + '.' + data.dealMonth + '.' + data.dealDay;
-
+        this.$session.get('bookmarks').forEach(element => {
+          if(element.house_no==this.item.no)
+          {
+            this.bookmark=true;
+            this.bookmarks.bookmark_no=element.bookmark_no;
+          }
+        });
       axios.get('http://localhost:9999/happyhouse/api/houseinfo/' + this.item.aptName).then(({ data }) => {
         if (typeof data.lat != "undefined") {
           this.lat = data.lat;
@@ -151,36 +169,72 @@ export default {
         }
       });
     });
-    console.log(this.item.no);
-            //bookmark =this.$session.get('bookmarks');
-        this.$session.get('bookmarks').forEach(element => {
-          console.log(element.house_no);
-          console.log(this.item.no);
-          console.log("++++++++++");
-          if(element.house_no==this.item.no)
-          {
-            this.bookmark=true;
-            this.bookmarks.bookmark_no=element.bookmark_no;
-            console.log("this.bookmark");
-          }
-        });
+
   },
 
   methods: {
-      moveList() {
-          this.$router.push('/#/housedeal');
-      },
+      notifyVue(verticalAlign, horizontalAlign, msg, type) {
+      this.$notify({
+        message: msg,
+        icon: "add_alert",
+        horizontalAlign: horizontalAlign,
+        verticalAlign: verticalAlign,
+        type: type
+      });
+    },
       bookmarkcancel(){
-          this.bookmark =false;
-          console.log(this.bookmark);
+        
+        axios.delete('http://localhost:9999/happyhouse/api/bookmark/' + this.bookmarks.bookmark_no).then(({data}) => {
+          let msg = 'fail';
+            if (data === 'success') {
+               axios.get('http://localhost:9999/happyhouse/api/bookmark/'+this.bookmarks.userid).then(({ data }) => {
+                 this.$session.set('bookmarks', data);
+                  this.bookmark =false;
+                 this.$session.get('bookmarks').forEach(element => {
+                if(element.house_no==this.item.no)
+                {
+                 this.bookmark=true;
+                 this.bookmarks.bookmark_no=element.bookmark_no;
+                  this.bookmarks.house_name= element.house_name;
+                 }
+                });
+                 });
+                 console.log(this.bookmark);
+              this.notifyVue('top', 'center', '즐겨찾기 취소', 'success');
+            } else {
+              this.notifyVue('top', 'center', '즐겨찾기 취소 실패', 'danger');
+            }
+        });
       },
       bookmarkselect(){
         this.bookmarks.house_no= this.item.no;
-        console.log(this.bookmarks.house_no);
-        console.log(this.bookmarks.userid);
-        axios.post('http://localhost:9999/happyhouse/api/bookmark',this.bookmarks);
+        this.bookmarks.house_name= this.item.aptName;
+        console.log(this.bookmarks);
+        axios.post('http://localhost:9999/happyhouse/api/bookmark',this.bookmarks).then(({data}) => {
+          let msg = 'fail';
+            if (data === 'success') {
+              axios.get('http://localhost:9999/happyhouse/api/bookmark/'+this.bookmarks.userid).then(({ data }) => {
+                 this.$session.set('bookmarks', data);
+                 this.$session.get('bookmarks').forEach(element => {
+                if(element.house_no==this.item.no)
+                {
+                 this.bookmark=true;
+                 this.bookmarks.bookmark_no=element.bookmark_no;
+                 }
+                });
+                
+                 console.log(this.bookmarks.userid);
+                 console.log(this.$session.get('bookmarks').length);
+        });
         this.bookmark =true;
         console.log(this.bookmark);
+              this.notifyVue('top', 'center', '즐겨찾기 설정', 'success');
+
+            } else {
+              this.notifyVue('top', 'center', '즐겨찾기 설정 실패', 'danger');
+            }
+        });
+        
       }
 
   }

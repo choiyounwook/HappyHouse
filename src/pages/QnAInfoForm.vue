@@ -110,8 +110,24 @@ export default {
   },
 
   methods: {
+    notifyVue(verticalAlign, horizontalAlign, msg, type) {
+      this.$notify({
+        message: msg,
+        icon: "add_alert",
+        horizontalAlign: horizontalAlign,
+        verticalAlign: verticalAlign,
+        type: type
+      });
+    },
       deleteQnA() {
-        axios.delete('http://localhost:9999/happyhouse/api/qna/' + this.$route.query.qnaNo);
+        axios.delete('http://localhost:9999/happyhouse/api/qna/' + this.$route.query.qnaNo).then(({data}) => {
+          let msg = 'fail';
+            if (data === 'success') {
+              this.notifyVue('top', 'center', '질문 삭제가 정상적으로 처리되었습니다.', 'success');
+            } else {
+              this.notifyVue('top', 'center', '질문 삭제 처리 도중 에러가 발생했습니다.', 'danger');
+            }
+        });
       }
   }
 };

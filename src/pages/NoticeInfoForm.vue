@@ -80,8 +80,24 @@ export default {
   },
 
   methods: {
+    notifyVue(verticalAlign, horizontalAlign, msg, type) {
+      this.$notify({
+        message: msg,
+        icon: "add_alert",
+        horizontalAlign: horizontalAlign,
+        verticalAlign: verticalAlign,
+        type: type
+      });
+    },
       deleteNotice() {
-        axios.delete('http://localhost:9999/happyhouse/api/notice/' + this.$route.query.no);
+        axios.delete('http://localhost:9999/happyhouse/api/notice/' + this.$route.query.no).then(({data}) => {
+          let msg = 'fail';
+            if (data === 'success') {
+              this.notifyVue('top', 'center', '공지사항 삭제가 정상적으로 처리되었습니다.', 'success');
+            } else {
+              this.notifyVue('top', 'center', '공지사항 삭제 처리 도중 에러가 발생했습니다.', 'danger');
+            }
+        });
       }
   }
 };

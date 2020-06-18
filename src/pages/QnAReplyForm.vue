@@ -89,9 +89,25 @@ export default {
     });
   },
   methods: {
+    notifyVue(verticalAlign, horizontalAlign, msg, type) {
+      this.$notify({
+        message: msg,
+        icon: "add_alert",
+        horizontalAlign: horizontalAlign,
+        verticalAlign: verticalAlign,
+        type: type
+      });
+    },
       replyQnA() {
         console.log(this.item);
-        axios.put('http://localhost:9999/happyhouse/api/qna/updateReply/'+ this.$route.query.no,this.item);
+        axios.put('http://localhost:9999/happyhouse/api/qna/updateReply/'+ this.$route.query.no,this.item).then(({data}) => {
+          let msg = 'fail';
+            if (data === 'success') {
+              this.notifyVue('top', 'center', '답변 등록이 정상적으로 처리되었습니다.', 'success');
+            } else {
+              this.notifyVue('top', 'center', '답변 등록 처리 도중 에러가 발생했습니다.', 'danger');
+            }
+        });
       }
   }
 };
