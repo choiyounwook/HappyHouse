@@ -199,7 +199,6 @@ export default {
                  }
                 });
                  });
-                 console.log(this.bookmark);
               this.notifyVue('top', 'center', '즐겨찾기 취소', 'success');
             } else {
               this.notifyVue('top', 'center', '즐겨찾기 취소 실패', 'danger');
