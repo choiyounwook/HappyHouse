@@ -2,7 +2,7 @@
 
 ## 프론트엔드
 
-veu
+veu, bootstrap
 
 ## 백엔드
 
